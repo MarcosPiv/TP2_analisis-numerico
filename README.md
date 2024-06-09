@@ -19,6 +19,7 @@ para peque˜nos espacios que conecten dichos bordes de manera de obtener un ´ar
 unica y conexa, delimitando en la figura el color amarillo.
 - Llene esta ultima area (mascara) y determine el area del color amarillo respecto al area total de la
 imagen. Realice las correcciones manuales que considere necesarias observando la imagen inicial.
-- Integre la intensidad de amarillo en el area encontrada, y determine qu´e imagen tenia mas cantidad de
+- Integre la intensidad de amarillo en el area encontrada, y determine que imagen tenia mas cantidad de
 muestra y obtenga conclusiones.
+
 
