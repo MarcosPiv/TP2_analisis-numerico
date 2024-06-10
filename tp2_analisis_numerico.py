@@ -5,6 +5,9 @@ def process_image(img):
     # Convertir la imagen de BGR a HSV
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
+    #Convertir la imagen de BGR a escala de grises, no se utiliza pero puede resultar util
+    gris = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
     # Definir los umbrales para el color amarillo
     umbral_amarillo_inferior = np.array([20, 50, 50])
     umbral_amarillo_superior = np.array([30, 255, 255])
@@ -13,7 +16,7 @@ def process_image(img):
     mascara = cv2.inRange(hsv, umbral_amarillo_inferior, umbral_amarillo_superior)
 
     # Aplicar la máscara al canal de saturación
-    canal_s = hsv[:,:,1]
+    canal_s = hsv[:,:,2]
     mascara_s = cv2.bitwise_and(canal_s, canal_s, mask=mascara)
 
     # Usar el algoritmo de Canny para detectar los bordes
@@ -50,16 +53,10 @@ def process_image(img):
 
     print(f'El área de color amarillo representa el {porcentaje_amarillo}% del área total de la imagen.')
 
-    # Convertir la imagen cerrada en una máscara binaria
-    mascara_cerrada = cerrado > 0
-
-    # Usar la máscara para seleccionar solo los píxeles amarillos en la imagen original
-    pixeles_amarillos = img[mascara_cerrada]
-
     # Sumar todas las intensidades de estos píxeles para obtener la intensidad total del color amarillo
-    intensidad_amarilla_total = np.sum(pixeles_amarillos)
+    intensidad_amarilla_total = np.sum(mascara_s)
 
-    print(f'La intensidad total del color amarillo es {intensidad_amarilla_total}.')
+    print(f'La intensidad total del color amarillo es { intensidad_amarilla_total}.')
 
     return rellenado, intensidad_amarilla_total
 
